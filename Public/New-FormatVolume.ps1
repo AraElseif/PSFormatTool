@@ -31,6 +31,11 @@
     Optional. Specifies a Name (label) for the volume after formatting.
     If not provided, the volume will be left without a label.
 
+.PARAMETER Force
+    Optional. Bypasses the safety checks for system and boot volume protections.
+    Use this only when you explicitly want to proceed despite the protections.
+    The function still validates that the target volume exists and is a valid formatting target.
+
 .EXAMPLE
     PS C:\> New-FormatVolume -DriveLetter D -FileSystem NTFS
 
@@ -90,12 +95,17 @@ function New-FormatVolume {
         [ValidateSet("exFAT", "NTFS")]
         [String]$FileSystem,
 
-        [String]$Name
+        [String]$Name,
+
+        [Switch]$Force
     )
     $DriveLetter = $DriveLetter.Trim().Substring(0, 1).ToUpperInvariant()
     $DiskInfo = Get-Volume -DriveLetter $DriveLetter -ErrorAction SilentlyContinue
-    if (-not (Test-Volume -DriveLetter $DriveLetter)) {
-        throw "The indicated volume is not recognized, is the system volume, is the boot volume, or cannot be formatted."
+    if ($Force) {
+        Write-Warning "-Force has been enabled. System and boot volume protections will be bypassed."
+    }
+    if (-not (Test-Volume -DriveLetter $DriveLetter -Force:$Force)) {
+        throw "The indicated volume is not recognized, is not a valid formatting target, or cannot be formatted."
     }
     if ($PSCmdlet.ShouldProcess("Volume $($DiskInfo.FileSystemLabel) - $($DiskInfo.DriveLetter) - $($DiskInfo.DriveType)", "All data will be deleted for a new format.")) {
         try {
@@ -103,7 +113,7 @@ function New-FormatVolume {
                 -DriveLetter $DriveLetter `
                 -Filesystem $FileSystem `
                 -Name $Name
-        }   catch {
+        } catch {
             $PSCmdlet.ThrowTerminatingError($_)
         }
     }

@@ -34,3 +34,9 @@ Changes planned for the next release.
 - Private 'Initialize-Format' function to perform volume formatting.
 - Support for `-Verbose`, `-WhatIf`, and `-Confirm`.
 - Added character control for exFAT format name.
+- Added `-Force` switch to override system and boot volume protection checks when explicitly required.
+
+### Documentation
+
+- Updated cmdlet help to document the `-Force` parameter and its safety implications.
+- Updated README examples, parameter reference, and warnings for the new switch.

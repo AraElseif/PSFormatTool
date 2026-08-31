@@ -41,7 +41,7 @@ Formats a specified volume with the indicated file system.
 #### Syntax
 
 ```powershell
-New-FormatVolume -DriveLetter <String> -FileSystem <String> [-VolumeName <String>] [-WhatIf] [-Confirm] [-Verbose]
+New-FormatVolume -DriveLetter <String> -FileSystem <String> [-Name <String>] [-Force] [-WhatIf] [-Confirm] [-Verbose]
 ```
 
 #### Parameters
@@ -50,7 +50,8 @@ New-FormatVolume -DriveLetter <String> -FileSystem <String> [-VolumeName <String
 |-----------|------|----------|-------------|
 | **DriveLetter** | String | Yes | Drive letter to format (A-Z). Example: `D` |
 | **FileSystem**  | String | Yes | File system to use: `NTFS` or `exFAT` |
-| **VolumeName**  | String | No | New name for the volume |
+| **Name**        | String | No | New label for the volume |
+| **Force**       | Switch | No | Bypasses the protection checks for the system and boot volume. Use with caution |
 | **WhatIf**      | Switch | No | Shows what would happen if the command is executed without running it |
 | **Confirm**     | Switch | No | Prompts for confirmation before formatting |
 | **Verbose**     | Switch | No | Displays detailed informational messages |
@@ -62,7 +63,10 @@ New-FormatVolume -DriveLetter <String> -FileSystem <String> [-VolumeName <String
 New-FormatVolume -DriveLetter D -FileSystem NTFS
 
 # Format drive E: to exFAT with a new name
-New-FormatVolume -DriveLetter E -FileSystem exFAT -VolumeName "BackupDrive"
+New-FormatVolume -DriveLetter E -FileSystem exFAT -Name "BackupDrive"
+
+# Force formatting even though the drive is protected by the system/boot checks
+New-FormatVolume -DriveLetter E -FileSystem NTFS -Force
 
 # See what would happen when formatting (without executing)
 New-FormatVolume -DriveLetter F -FileSystem NTFS -WhatIf
@@ -77,6 +81,7 @@ New-FormatVolume -DriveLetter G -FileSystem NTFS -Confirm -Verbose
 - Protects the operating system volume
 - Protects the boot volume
 - Verifies partition type
+- Allows explicit bypass with `-Force` when the user wants to override the safety protections
 
 **Multiple File Systems**
 - Compatible with NTFS
@@ -103,6 +108,7 @@ New-FormatVolume -DriveLetter G -FileSystem NTFS -Confirm -Verbose
 - The module includes protections to prevent formatting system drives
 - **Verify the correct drive** before executing the command
 - It is recommended to use `-WhatIf` first for preview
+- `-Force` bypasses the system/boot protections intentionally and should be used only when you are sure about the target volume
 - Requires **administrator permissions**
 
 ## Changelog
