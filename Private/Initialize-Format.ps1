@@ -15,11 +15,11 @@ function Initialize-Format {
     $Name = $Name.ToUpper()
     if ($FileSystem -eq "exFAT") {
         if ($Name.length -gt 11) {
-            throw "You cannot enter more than 11 characters for the label in the exFat format."
+            Write-Warning "You cannot enter more than 11 characters for the label in the exFat format."
         }
     }
     try {
-        Format-Volume -DriveLetter $DriveLetter -FileSystem $FileSystem -NewFileSystemLabel $Name -ErrorAction Stop | Out-Null
+        Format-Volume -DriveLetter $DriveLetter -FileSystem $FileSystem -NewFileSystemLabel $Name -Full -ErrorAction Stop | Out-Null
         Write-Verbose "Format completed successfully."
     }   catch {
         $PSCmdlet.ThrowTerminatingError($_)
