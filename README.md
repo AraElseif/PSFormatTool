@@ -50,11 +50,11 @@ New-FormatVolume -DriveLetter <String> -FileSystem <String> [-Name <String>] [-F
 |-----------|------|----------|-------------|
 | **DriveLetter** | String | Yes | Drive letter to format (A-Z). Example: `D` |
 | **FileSystem**  | String | Yes | File system to use: `NTFS` or `exFAT` |
-| **Name**        | String | No | New label for the volume |
-| **Force**       | Switch | No | Bypasses the protection checks for the system and boot volume. Use with caution |
-| **WhatIf**      | Switch | No | Shows what would happen if the command is executed without running it |
-| **Confirm**     | Switch | No | Prompts for confirmation before formatting |
-| **Verbose**     | Switch | No | Displays detailed informational messages |
+| **Name**        | String | No  | New label for the volume |
+| **Force**       | Switch | No  | Bypasses the protection checks for the system and boot volume. Use with caution |
+| **WhatIf**      | Switch | No  | Shows what would happen if the command is executed without running it |
+| **Confirm**     | Switch | No  | Prompts for confirmation before formatting |
+| **Verbose**     | Switch | No  | Displays detailed informational messages |
 
 #### Examples
 
@@ -135,6 +135,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 **AraElseif**
 
+## Repository
+
 GitHub: [AraElseif/PSFormatTool](https://github.com/AraElseif/PSFormatTool)
 
 ```bash
@@ -150,3 +152,4 @@ To report issues, suggestions, or contributions, please contact the author.
 **Status:** In development (Beta)  
 **Compatibility:** PowerShell 5.1+, PowerShell Core  
 **Last Updated:** 2026-08-31
+
