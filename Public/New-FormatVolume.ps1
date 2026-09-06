@@ -36,6 +36,9 @@
     Use this only when you explicitly want to proceed despite the protections.
     The function still validates that the target volume exists and is a valid formatting target.
 
+.PARAMETER Full
+    Optional switch. Enables a full format instead of a quick format.
+
 .EXAMPLE
     PS C:\> New-FormatVolume -DriveLetter D -FileSystem NTFS
 
@@ -56,6 +59,11 @@
 
     Formats drive G: to NTFS with explicit confirmation prompt and verbose output showing detailed information
     about the operation being performed.
+
+.EXAMPLE
+    PS C:\> New-FormatVolume -DriveLetter H -FileSystem NTFS -Full
+
+    Performs a full format on drive H: instead of a quick format.
 
 .INPUTS
     None. You cannot pipe objects to New-FormatVolume.
@@ -97,7 +105,9 @@ function New-FormatVolume {
 
         [String]$Name,
 
-        [Switch]$Force
+        [Switch]$Force,
+
+        [Switch]$Full
     )
     $DriveLetter = $DriveLetter.Trim().Substring(0, 1).ToUpperInvariant()
     $DiskInfo = Get-Volume -DriveLetter $DriveLetter -ErrorAction SilentlyContinue
@@ -112,7 +122,8 @@ function New-FormatVolume {
             Initialize-Format `
                 -DriveLetter $DriveLetter `
                 -Filesystem $FileSystem `
-                -Name $Name
+                -Name $Name `
+                -Full:$Full
         } catch {
             $PSCmdlet.ThrowTerminatingError($_)
         }

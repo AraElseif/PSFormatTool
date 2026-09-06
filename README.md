@@ -41,7 +41,7 @@ Formats a specified volume with the indicated file system.
 #### Syntax
 
 ```powershell
-New-FormatVolume -DriveLetter <String> -FileSystem <String> [-Name <String>] [-Force] [-WhatIf] [-Confirm] [-Verbose]
+New-FormatVolume -DriveLetter <String> -FileSystem <String> [-Name <String>] [-Force] [-Full] [-WhatIf] [-Confirm] [-Verbose]
 ```
 
 #### Parameters
@@ -52,6 +52,7 @@ New-FormatVolume -DriveLetter <String> -FileSystem <String> [-Name <String>] [-F
 | **FileSystem**   | String | Yes      | File system to use: `NTFS` or `exFAT`. |
 | **Name**         | String | No       | New label for the volume. |
 | **Force**        | Switch | No       | Bypasses the protection checks for the system and boot volume. Use with caution. |
+| **Full**         | Switch | No       | Performs a full format instead of a quick format. |
 | **WhatIf**       | Switch | No       | Shows what would happen if the command is executed without running it. |
 | **Confirm**      | Switch | No       | Prompts for confirmation before formatting. |
 | **Verbose**      | Switch | No       | Displays detailed informational messages. |
@@ -73,6 +74,9 @@ New-FormatVolume -DriveLetter F -FileSystem NTFS -WhatIf
 
 # Format with prior confirmation
 New-FormatVolume -DriveLetter G -FileSystem NTFS -Confirm -Verbose
+
+# Perform a full format
+New-FormatVolume -DriveLetter H -FileSystem NTFS -Full
 ```
 
 ## Features
@@ -150,5 +154,4 @@ To report issues, suggestions, or contributions, please contact the author.
 ## Status and Warnings
 
 **Status:** In development (Beta)  
-**Compatibility:** PowerShell 5.1+, PowerShell Core  
-**Last Updated:** 2026-08-31
+**Compatibility:** PowerShell 5.1+, PowerShell Core

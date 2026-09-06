@@ -9,7 +9,9 @@ function Initialize-Format {
         [ValidateSet("exFAT", "NTFS")]
         [String]$FileSystem,
 
-        [String]$Name
+        [String]$Name,
+
+        [Switch]$Full
     )
     $DriveLetter = $DriveLetter.Trim().Substring(0, 1).ToUpperInvariant()
     $Name = $Name.ToUpper()
@@ -19,7 +21,7 @@ function Initialize-Format {
         }
     }
     try {
-        Format-Volume -DriveLetter $DriveLetter -FileSystem $FileSystem -NewFileSystemLabel $Name -Full -ErrorAction Stop | Out-Null
+        Format-Volume -DriveLetter $DriveLetter -FileSystem $FileSystem -NewFileSystemLabel $Name -Full:$Full -ErrorAction Stop | Out-Null
         Write-Verbose "Format completed successfully."
     }   catch {
         $PSCmdlet.ThrowTerminatingError($_)

@@ -40,3 +40,13 @@ Changes planned for the next release.
 
 - Updated cmdlet help to document the `-Force` parameter and its safety implications.
 - Updated README examples, parameter reference, and warnings for the new switch.
+
+## [0.1.1] - 2026-08-06
+
+### Added
+
+- Added the `-Full` switch to enable full volume formatting when required.
+
+### Documentation
+
+- Documented the `-Full` parameter in the cmdlet help and README.
