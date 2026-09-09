@@ -5,7 +5,6 @@ function Test-BootVolume {
         [ValidatePattern('^[A-Za-z]$')]
         [String]$DriveLetter
     )
-    $DriveLetter = $DriveLetter.Trim().ToUpperInvariant()
     $Disk = Get-Partition -DriveLetter $DriveLetter -ErrorAction SilentlyContinue |
         Get-Disk -ErrorAction SilentlyContinue
     if ($Disk -and $Disk.IsBoot) {

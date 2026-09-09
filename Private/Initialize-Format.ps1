@@ -13,7 +13,6 @@ function Initialize-Format {
 
         [Switch]$Full
     )
-    $DriveLetter = $DriveLetter.Trim().Substring(0, 1).ToUpperInvariant()
     $Name = $Name.ToUpper()
     if ($FileSystem -eq "exFAT") {
         if ($Name.length -gt 11) {

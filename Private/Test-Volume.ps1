@@ -7,7 +7,6 @@ function Test-Volume {
 
         [Switch]$Force
     )
-    $DriveLetter = $DriveLetter.Trim().Substring(0, 1).ToUpperInvariant()
     $GetVolume = Get-Volume -DriveLetter $DriveLetter -ErrorAction SilentlyContinue
     if (-not $GetVolume) {
         return $false

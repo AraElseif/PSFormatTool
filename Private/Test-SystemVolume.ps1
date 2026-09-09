@@ -5,7 +5,6 @@ function Test-SystemVolume {
         [ValidatePattern('^[A-Za-z]$')]
         [String]$DriveLetter
     )
-    $DriveLetter = $DriveLetter.Trim().ToUpperInvariant()
     $SystemDrive = $Env:SystemDrive.Trim(':').ToUpperInvariant()
     if ($DriveLetter -eq $SystemDrive) {
         return $true
