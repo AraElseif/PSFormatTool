@@ -5,8 +5,9 @@ function Test-PartitionType {
         [ValidatePattern('^[A-Za-z]$')]
         [String]$DriveLetter
     )
-    $PartitionType = Get-Partition -DriveLetter $DriveLetter | foreach-Object {$_.Type -eq "Basic"} -ErrorAction SilentlyContinue
-    if (!($PartitionType)) {
+    $Partition = Get-Partition -DriveLetter $DriveLetter
+    $ProtectedPartitionTypes = @('System', 'Recovery', 'Reserved')
+    if ($Partition.Type -in $ProtectedPartitionTypes) {
         return $false
     }
     return $true

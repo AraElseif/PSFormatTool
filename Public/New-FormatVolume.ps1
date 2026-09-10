@@ -115,7 +115,7 @@ function New-FormatVolume {
         Write-Warning "-Force has been enabled. System and boot volume protections will be bypassed."
     }
     if (-not (Test-Volume -DriveLetter $DriveLetter -Force:$Force)) {
-        throw "The indicated volume is not recognized, is not a valid formatting target, or cannot be formatted."
+        return
     }
     if ($PSCmdlet.ShouldProcess("Volume $($DiskInfo.FileSystemLabel) - $($DiskInfo.DriveLetter) - $($DiskInfo.DriveType)", "All data will be deleted for a new format.")) {
         try {
