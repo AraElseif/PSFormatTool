@@ -13,7 +13,6 @@ function Initialize-Format {
 
         [Switch]$Full
     )
-    $Name = $Name.ToUpper()
     if ($FileSystem -eq "exFAT") {
         if ($Name.length -gt 11) {
             Write-Warning "You cannot enter more than 11 characters for the label in the exFat format."
